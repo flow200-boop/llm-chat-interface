@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     generationTimer: null,
     activeModel: 'pro',
     settings: {
-      theme: 'midnight',
+      theme: 'rose-glass',
       systemPrompt: '',
       speed: 2 // 1: Slow, 2: Normal, 3: Fast, 4: Instant
     },
@@ -1323,17 +1323,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Reset defaults
   settingsResetBtn.addEventListener('click', () => {
-    state.settings.theme = 'midnight';
+    state.settings.theme = 'rose-glass';
     state.settings.systemPrompt = '';
     state.settings.speed = 2;
 
-    applyTheme('midnight');
+    applyTheme('rose-glass');
     systemPromptTextarea.value = '';
     speedSlider.value = 2;
     updateSpeedLabel(2);
 
     themeCards.forEach(c => {
-      if (c.getAttribute('data-theme') === 'midnight') {
+      if (c.getAttribute('data-theme') === 'rose-glass') {
         c.classList.add('active');
       } else {
         c.classList.remove('active');
@@ -1437,4 +1437,86 @@ document.addEventListener('DOMContentLoaded', () => {
   if (state.conversations.length === 0) {
     createNewChat();
   }
+
+  // ==========================================================================
+  // 12. Pill Navigation Bar Handlers
+  // ==========================================================================
+
+  const pillNavItems = document.querySelectorAll('.pill-nav-item');
+  const pillChatsBtn = document.getElementById('pill-chats');
+  const pillSettingsBtn = document.getElementById('pill-settings');
+  const pillHomeBtn = document.getElementById('pill-home');
+  const pillExportsBtn = document.getElementById('pill-exports');
+
+  // Set active pill nav item
+  function setPillActive(navName) {
+    pillNavItems.forEach(item => {
+      if (item.getAttribute('data-nav') === navName) {
+        item.classList.add('active');
+      } else {
+        item.classList.remove('active');
+      }
+    });
+  }
+
+  // Home button — create new chat / show welcome
+  if (pillHomeBtn) {
+    pillHomeBtn.addEventListener('click', () => {
+      setPillActive('home');
+      createNewChat();
+    });
+  }
+
+  // Chats button — toggle sidebar visibility
+  if (pillChatsBtn) {
+    pillChatsBtn.addEventListener('click', () => {
+      if (sidebar.classList.contains('collapsed')) {
+        sidebar.classList.remove('collapsed');
+        sidebarOpenBtn.classList.add('hidden');
+        setPillActive('chats');
+      } else {
+        sidebar.classList.add('collapsed');
+        sidebarOpenBtn.classList.remove('hidden');
+        setPillActive('home');
+      }
+    });
+  }
+
+  // Exports button — open export modal
+  if (pillExportsBtn) {
+    pillExportsBtn.addEventListener('click', () => {
+      if (!state.activeChatId) {
+        showToast('No active conversation to export.', false);
+        return;
+      }
+      exportModal.classList.remove('hidden');
+    });
+  }
+
+  // Settings button — open settings modal
+  if (pillSettingsBtn) {
+    pillSettingsBtn.addEventListener('click', () => {
+      settingsModal.classList.remove('hidden');
+      // Sync modal state with current settings
+      systemPromptTextarea.value = state.settings.systemPrompt || '';
+      speedSlider.value = state.settings.speed;
+      updateSpeedLabel(state.settings.speed);
+      themeCards.forEach(c => {
+        if (c.getAttribute('data-theme') === state.settings.theme) {
+          c.classList.add('active');
+        } else {
+          c.classList.remove('active');
+        }
+      });
+    });
+  }
+
+  // Activate the correct theme card on initial load
+  themeCards.forEach(c => {
+    if (c.getAttribute('data-theme') === state.settings.theme) {
+      c.classList.add('active');
+    } else {
+      c.classList.remove('active');
+    }
+  });
 });

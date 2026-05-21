@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Antigravity Chat | Next-Gen AI Workspace</title>
+  <meta name="description" content="Antigravity Chat - A premium glassmorphic AI workspace powered by next-gen language models.">
   <!-- Google Fonts: Outfit for titles, Inter for UI & Chat text, JetBrains Mono for Code -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -108,59 +109,114 @@
     <symbol id="icon-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <path d="M18 6 6 18M6 6l12 12"/>
     </symbol>
+
+    <!-- NEW icons for pill navigation -->
+    <symbol id="icon-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+      <polyline points="9 22 9 12 15 12 15 22"/>
+    </symbol>
+    <symbol id="icon-message" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+    </symbol>
+    <symbol id="icon-logout" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+      <polyline points="16 17 21 12 16 7"/>
+      <line x1="21" y1="12" x2="9" y2="12"/>
+    </symbol>
+    <symbol id="icon-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"/>
+      <line x1="12" y1="16" x2="12" y2="12"/>
+      <line x1="12" y1="8" x2="12.01" y2="8"/>
+    </symbol>
+    <symbol id="icon-chevron-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="9 18 15 12 9 6"/>
+    </symbol>
+    <symbol id="icon-compass" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"/>
+      <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
+    </symbol>
   </svg>
 
   <div class="app-container">
     
-    <!-- Pill-shaped Icon Navigation Bar (Left-most) -->
-    <nav class="pill-nav-bar">
-      <!-- Traffic Light Decoration Dots -->
-      <div class="pill-traffic-lights">
-        <span class="pill-dot dot-green"></span>
-        <span class="pill-dot dot-yellow"></span>
-        <span class="pill-dot dot-red"></span>
+    <!-- ===== PILL NAVIGATION BAR (Floating, icon-only, left edge) ===== -->
+    <nav class="pill-nav-bar" id="pill-nav">
+      <div class="pill-nav-top">
+        <div class="traffic-dots">
+          <span class="dot dot-red"></span>
+          <span class="dot dot-yellow"></span>
+          <span class="dot dot-green"></span>
+        </div>
+        <button class="pill-nav-brand" id="pill-brand-btn" title="Antigravity AI">
+          <svg class="icon"><use href="#icon-sparkles"/></svg>
+        </button>
       </div>
-      
-      <!-- App Logo -->
-      <div class="pill-logo" title="Antigravity AI">
-        <svg class="icon"><use href="#icon-sparkles"/></svg>
+
+      <div class="pill-nav-items">
+        <button class="pill-nav-item active" data-nav="home" id="pill-home" title="Home">
+          <span class="pill-active-indicator"></span>
+          <svg class="icon"><use href="#icon-home"/></svg>
+        </button>
+        <button class="pill-nav-item" data-nav="search" id="pill-search" title="Explore">
+          <span class="pill-active-indicator"></span>
+          <svg class="icon"><use href="#icon-search"/></svg>
+        </button>
+        <button class="pill-nav-item" data-nav="chats" id="pill-chats" title="Chats">
+          <span class="pill-active-indicator"></span>
+          <svg class="icon"><use href="#icon-message"/></svg>
+        </button>
+        <button class="pill-nav-item" data-nav="exports" id="pill-exports" title="Exports">
+          <span class="pill-active-indicator"></span>
+          <svg class="icon"><use href="#icon-export"/></svg>
+        </button>
       </div>
-      
-      <!-- Icon Navigation List -->
-      <div class="pill-nav-menu">
-        <button class="pill-nav-item active" id="pill-nav-chat" title="Active Chat">
-          <svg class="icon"><use href="#icon-paperclip"/></svg>
+
+      <div class="pill-nav-separator"></div>
+
+      <div class="pill-nav-bottom-items">
+        <button class="pill-nav-item" data-nav="info" id="pill-info" title="Information">
+          <span class="pill-active-indicator"></span>
+          <svg class="icon"><use href="#icon-info"/></svg>
         </button>
-        <button class="pill-nav-item" id="new-chat-btn" title="New Chat">
-          <svg class="icon"><use href="#icon-plus"/></svg>
-        </button>
-        <button class="pill-nav-item" id="sidebar-toggle-btn" title="Toggle History Menu">
-          <svg class="icon"><use href="#icon-sidebar"/></svg>
-        </button>
-        <button class="pill-nav-item" id="settings-trigger-btn" title="Settings">
+        <button class="pill-nav-item" data-nav="settings" id="pill-settings" title="Settings">
+          <span class="pill-active-indicator"></span>
           <svg class="icon"><use href="#icon-gear"/></svg>
         </button>
+        <button class="pill-nav-item" data-nav="logout" id="pill-logout" title="Log out">
+          <span class="pill-active-indicator"></span>
+          <svg class="icon"><use href="#icon-logout"/></svg>
+        </button>
       </div>
-      
-      <!-- User Avatar at Bottom -->
-      <div class="pill-avatar-wrapper" id="pill-profile-trigger">
+
+      <div class="pill-nav-avatar-wrap">
         <div class="pill-avatar">
           <svg class="icon"><use href="#icon-user"/></svg>
         </div>
       </div>
     </nav>
-    
-    <!-- Collapsible Navigation Sidebar -->
+
+    <!-- ===== FROSTED GLASS SIDEBAR (Chat History) ===== -->
     <aside class="sidebar" id="sidebar">
-      <div class="sidebar-header">
-        <div class="sidebar-traffic-lights">
-          <span class="pill-dot dot-red"></span>
-          <span class="pill-dot dot-yellow"></span>
-          <span class="pill-dot dot-green"></span>
+      <div class="sidebar-glass-top">
+        <div class="traffic-dots">
+          <span class="dot dot-red"></span>
+          <span class="dot dot-yellow"></span>
+          <span class="dot dot-green"></span>
         </div>
-        <h2>Antigravity</h2>
-        <div class="menu-label">Conversations</div>
+        <h2 class="sidebar-brand-title">Antigravity</h2>
       </div>
+
+      <div class="sidebar-header">
+        <button class="new-chat-btn" id="new-chat-btn">
+          <svg class="icon"><use href="#icon-plus"/></svg>
+          <span>New Chat</span>
+        </button>
+        <button class="sidebar-close-btn" id="sidebar-toggle-btn" title="Close Sidebar">
+          <svg class="icon"><use href="#icon-sidebar"/></svg>
+        </button>
+      </div>
+
+      <div class="sidebar-menu-label">CHATS</div>
 
       <!-- Conversations History List -->
       <div class="sidebar-content">
@@ -172,29 +228,35 @@
 
       <!-- User Profile and Actions area -->
       <div class="sidebar-footer">
-        <div class="user-profile" id="sidebar-profile-card">
+        <button class="footer-btn" id="settings-trigger-btn">
+          <svg class="icon"><use href="#icon-gear"/></svg>
+          <span>Settings</span>
+          <svg class="icon footer-chevron"><use href="#icon-chevron-right"/></svg>
+        </button>
+        <div class="user-profile">
           <div class="avatar user-avatar">
             <svg class="icon"><use href="#icon-user"/></svg>
           </div>
           <div class="user-info">
             <div class="username">Beta Explorer</div>
-            <div class="usertier">Pro Account</div>
+            <div class="usertier">Premium Account</div>
           </div>
-          <svg class="icon chevron-right"><use href="#icon-chevron-down"/></svg>
+          <svg class="icon profile-chevron"><use href="#icon-chevron-right"/></svg>
         </div>
       </div>
     </aside>
 
-    <!-- Main Chat Container -->
+    <!-- Hidden sidebar-open-btn for JS compatibility -->
+    <button class="sidebar-open-btn hidden" id="sidebar-open-btn" title="Open Sidebar" aria-hidden="true">
+      <svg class="icon"><use href="#icon-sidebar"/></svg>
+    </button>
+
+    <!-- ===== MAIN CHAT VIEWPORT ===== -->
     <main class="chat-viewport">
       
       <!-- Top Sticky Header -->
       <header class="app-header">
         <div class="header-left">
-          <button class="sidebar-open-btn hidden" id="sidebar-open-btn" title="Open Sidebar">
-            <svg class="icon"><use href="#icon-sidebar"/></svg>
-          </button>
-          
           <!-- Modern Custom Dropdown for LLM Models Selection -->
           <div class="model-select-wrapper">
             <button class="model-select-btn" id="model-select-btn">
@@ -380,7 +442,7 @@
         <div class="settings-group">
           <label class="settings-label">Interface Theme</label>
           <div class="theme-grid">
-            <button class="theme-card active" data-theme="rose-glass">
+            <button class="theme-card" data-theme="rose-glass">
               <span class="theme-color-preview preview-rose-glass"></span>
               <span class="theme-card-name">Rose Glass</span>
             </button>
